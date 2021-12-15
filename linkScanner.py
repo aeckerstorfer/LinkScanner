@@ -42,7 +42,7 @@ class LinkScanner:
                     href = '{}{}'.format(
                         url, href) if href.startswith('/') else href
 
-                    if href not in checked_urls:
+                    if href not in checked_urls and self.__check_if_still_on_site(base_url, href):
                         self.__get_page_links(
                             base_url, href, return_list, checked_urls)
 
@@ -51,3 +51,6 @@ class LinkScanner:
                 and not url.startswith('.')
                 and url != ''
                 )
+
+    def __check_if_still_on_site(self, base_url, url):
+        return url.startswith(base_url)
